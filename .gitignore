@@ -1,0 +1,8 @@
+# Ignore Terraform local files
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+*.tfstate
+*.tfstate.backup
+crash.log
