@@ -6,3 +6,15 @@ terraform.tfstate.backup
 *.tfstate
 *.tfstate.backup
 crash.log
+# Terraform files
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# AWS credentials
+.aws/
+*.zip
+
+# Docker cache
+*.tar
