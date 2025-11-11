@@ -1,21 +1,92 @@
-# Ignore Terraform local files
+# =====================================================
+#  TERRAFORM
+# =====================================================
+# Exclure les fichiers d’état et les dossiers internes
 .terraform/
 .terraform.lock.hcl
 terraform.tfstate
-terraform.tfstate.backup
-*.tfstate
-*.tfstate.backup
+terraform.tfstate.*
 crash.log
-# Terraform files
-*.tfstate
-*.tfstate.*
-.terraform/
-.terraform.lock.hcl
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
 
-# AWS credentials
+# Exclure les providers téléchargés (binaires très lourds)
+terraform/.terraform/
+terraform/.terraform/*
+
+# =====================================================
+#  AWS & CREDENTIALS
+# =====================================================
+# Empêcher toute fuite d’identifiants ou de clés
 .aws/
+*.pem
+*.key
 *.zip
 
-# Docker cache
+# =====================================================
+#  PYTHON / FLASK
+# =====================================================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+instance/
+.env
+venv/
+ENV/
+env/
+*.egg-info/
+*.log
+
+# =====================================================
+#  DOCKER
+# =====================================================
+# Exclure les caches, images et volumes locaux
 *.tar
-.terraform/
+*.img
+.docker/
+docker-compose.override.yml
+
+# =====================================================
+#  SYSTEME / IDE
+# =====================================================
+# Fichiers temporaires et caches d’éditeur
+*.swp
+*.bak
+*.tmp
+*.old
+*.orig
+*~
+.DS_Store
+Thumbs.db
+
+# Visual Studio Code / JetBrains
+.vscode/
+.idea/
+*.code-workspace
+
+# =====================================================
+#  AUTRES
+# =====================================================
+# Archives ou exports
+*.gz
+*.zip
+*.7z
+*.rar
+*.iso
+
+# Logs ou rapports
+*.log
+*.out
+*.err
+*.pid
+
+# Sauvegardes temporaires
+backup/
+temp/
+tmp/
+
