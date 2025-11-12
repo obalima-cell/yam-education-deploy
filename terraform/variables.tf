@@ -1,7 +1,15 @@
-variable "project_name" { default = "yam-ecs-fargate" }
-variable "region" { default = "us-east-1" }
-variable "container_port" { default = 8000 }
-variable "desired_count" { default = 1 }
-variable "cpu" { default = 256 }
-variable "memory" { default = 512 }
-variable "image_url" { default = "" }
+variable "region" {
+  description = "AWS region"
+  default     = "us-east-1"
+}
+
+variable "image_url" {
+  description = "ECR image URL for ECS task"
+  type        = string
+}
+
+variable "container_port" {
+  description = "Port utilisé par le conteneur"
+  default     = 8000
+}
+

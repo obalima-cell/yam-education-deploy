@@ -1,4 +1,4 @@
-# Policy de base pour permettre à ECS Fargate d'accéder à ECR et CloudWatch
+# Policy de base pour ECS Fargate
 data "aws_iam_policy_document" "ecs_task_assume_role" {
   statement {
     actions = ["sts:AssumeRole"]
@@ -9,13 +9,21 @@ data "aws_iam_policy_document" "ecs_task_assume_role" {
   }
 }
 
-# Rôle d'exécution (ECR + CloudWatch)
+# Rôle d'exécution (permet d'accéder à ECR et CloudWatch)
 resource "aws_iam_role" "ecs_task_execution_role" {
   name               = "yam-ecs-task-execution-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_task_assume_role.json
 }
 
+# Politique de base pour ECS
 resource "aws_iam_role_policy_attachment" "ecs_task_execution_policy" {
   role       = aws_iam_role.ecs_task_execution_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
+
+# ✅ Ajout : accès complet à ECR
+resource "aws_iam_role_policy_attachment" "ecs_task_ecr_access" {
+  role       = aws_iam_role.ecs_task_execution_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess"
+}
+

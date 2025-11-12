@@ -9,14 +9,13 @@ resource "aws_ecs_task_definition" "app" {
   cpu                      = "256"
   memory                   = "512"
 
-  # ✅ Ces lignes doivent être ici, dans la task definition
-  execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
-  task_role_arn            = aws_iam_role.ecs_task_execution_role.arn
+  execution_role_arn = aws_iam_role.ecs_task_execution_role.arn
+  task_role_arn      = aws_iam_role.ecs_task_execution_role.arn
 
   container_definitions = jsonencode([
     {
-      name  = "app"
-      image = var.image_url
+      name      = "app"
+      image     = var.image_url        # ✅ Image transmise par la variable
       essential = true
       portMappings = [
         {
@@ -38,8 +37,8 @@ resource "aws_ecs_service" "app" {
 
   network_configuration {
     subnets         = [aws_subnet.public_a.id, aws_subnet.public_b.id]
-    security_groups = [aws_security_group.ecs_sg.id]
     assign_public_ip = true
+    security_groups  = [aws_security_group.ecs_sg.id]
   }
 
   load_balancer {

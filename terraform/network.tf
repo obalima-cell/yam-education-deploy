@@ -25,3 +25,23 @@ resource "aws_subnet" "public_b" {
   availability_zone       = "us-east-1b"
   tags = { Name = "yam-public-b" }
 }
+# Table de routage principale
+resource "aws_route_table" "public" {
+  vpc_id = aws_vpc.main.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw.id
+  }
+  tags = { Name = "yam-public-rt" }
+}
+
+# Association des subnets publics à la table de routage
+resource "aws_route_table_association" "public_a_assoc" {
+  subnet_id      = aws_subnet.public_a.id
+  route_table_id = aws_route_table.public.id
+}
+
+resource "aws_route_table_association" "public_b_assoc" {
+  subnet_id      = aws_subnet.public_b.id
+  route_table_id = aws_route_table.public.id
+}
