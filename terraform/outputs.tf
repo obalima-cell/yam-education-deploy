@@ -1,2 +1,4 @@
-output "alb_dns_name" { value = aws_lb.app_alb.dns_name }
-output "ecr_repository_url" { value = aws_ecr_repository.app.repository_url }
+output "ecr_repository_url" {
+  value = "411902770159.dkr.ecr.us-east-1.amazonaws.com/yam-ecs-fargate"
+}
+

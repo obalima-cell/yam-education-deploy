@@ -9,8 +9,8 @@ resource "aws_ecs_task_definition" "app" {
   cpu                      = "256"
   memory                   = "512"
 
-  execution_role_arn = aws_iam_role.ecs_task_execution_role.arn
-  task_role_arn      = aws_iam_role.ecs_task_execution_role.arn
+execution_role_arn = "arn:aws:iam::411902770159:role/yam-ecs-task-execution-role"
+task_role_arn      = "arn:aws:iam::411902770159:role/yam-ecs-task-execution-role"
 
   container_definitions = jsonencode([
     {
