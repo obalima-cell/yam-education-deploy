@@ -6,13 +6,15 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      # 1 — Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 2 — Config AWS
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -20,35 +22,23 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Log in to Amazon ECR
-        uses: aws-actions/amazon-ecr-login@v2
+      # 3 — Login to ECR
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
 
+      # 4 — Build / Tag / Push Docker
       - name: Build, Tag and Push Docker image
         run: |
+          cd yam-ecs-fargate-sample    # <<< IMPORTANT !!!
           IMAGE_TAG=v1
-          ECR_URL=411902770159.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/yam-ecs-fargate
-          docker build -t yam-app .
-          docker tag yam-app:latest $ECR_URL:$IMAGE_TAG
-          docker push $ECR_URL:$IMAGE_TAG
+          ECR_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/yam-ecs-fargate
 
-      - name: Apply Terraform (Network / ECS Infra)
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: 1.9.5
+          docker build -t $ECR_URI:$IMAGE_TAG .
+          docker push $ECR_URI:$IMAGE_TAG
 
-      - name: Terraform Init
+      # 5 — Terraform Deploy
+      - name: Terraform Init / Apply
+        working-directory: yam-ecs-fargate-sample/terraform
         run: |
-          cd terraform
           terraform init
-
-      - name: Terraform Apply
-        run: |
-          cd terraform
-          terraform apply -auto-approve -var="image_url=411902770159.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/yam-ecs-fargate:v1"
-
-      - name: Force a new ECS deployment
-        run: |
-          aws ecs update-service \
-            --cluster yam-ecs-cluster \
-            --service yam-service \
-            --force-new-deployment
+          terraform apply -auto-approve -var="image_url=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/yam-ecs-fargate:v1"
