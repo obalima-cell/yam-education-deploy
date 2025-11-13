@@ -1,4 +1,4 @@
-name: Deploy Yam Education Infrastructure
+name: Deploy Yam ECS Fargate
 
 on:
   push:
@@ -6,11 +6,11 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Configure AWS credentials
@@ -18,18 +18,37 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Setup Terraform
+      - name: Log in to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, Tag and Push Docker image
+        run: |
+          IMAGE_TAG=v1
+          ECR_URL=411902770159.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/yam-ecs-fargate
+          docker build -t yam-app .
+          docker tag yam-app:latest $ECR_URL:$IMAGE_TAG
+          docker push $ECR_URL:$IMAGE_TAG
+
+      - name: Apply Terraform (Network / ECS Infra)
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.9.5
 
       - name: Terraform Init
-        run: terraform init
-
-      - name: Terraform Plan
-        run: terraform plan
+        run: |
+          cd terraform
+          terraform init
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: |
+          cd terraform
+          terraform apply -auto-approve -var="image_url=411902770159.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/yam-ecs-fargate:v1"
+
+      - name: Force a new ECS deployment
+        run: |
+          aws ecs update-service \
+            --cluster yam-ecs-cluster \
+            --service yam-service \
+            --force-new-deployment
