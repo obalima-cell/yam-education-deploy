@@ -1,0 +1,61 @@
+name: Deploy Yam ECS Fargate
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+  IMAGE_TAG: v1
+  ECR_REPO: yam-ecs-fargate
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 🔹 Récupération du code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 🔹 Connexion AWS
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # 🔹 Connexion à Amazon ECR
+      - name: Log in to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # 🔹 Build + Tag + Push Docker image
+      - name: Build, Tag and Push Docker image
+        run: |
+          echo "🏗️ Building Docker image…"
+          docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO:$IMAGE_TAG .
+
+          echo "🏷️ Tagging image…"
+          docker tag \
+            $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO:$IMAGE_TAG \
+            $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO:$IMAGE_TAG
+
+          echo "📤 Pushing image to ECR…"
+          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO:$IMAGE_TAG
+
+      # 🔹 Terraform (dans le dossier terraform/)
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.7
+
+      - name: Terraform Init
+        working-directory: terraform
+        run: terraform init
+
+      - name: Terraform Apply (update ECS service with new image)
+        working-directory: terraform
+        run: terraform apply -auto-approve -var="image_url=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO:$IMAGE_TAG"
