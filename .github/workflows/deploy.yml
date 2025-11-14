@@ -33,9 +33,10 @@ jobs:
     - name: Run basic health test
       run: |
         echo "Running health test..."
-        docker run -d -p 8080:8080 --name test-container app-image
+        docker run -d -p 8000:8000 --name test-container app-image
         sleep 5
-        curl -f http://localhost:8080 || exit 1
+        curl -f http://localhost:8000 || exit 1
+
         docker stop test-container
         docker rm test-container
 
