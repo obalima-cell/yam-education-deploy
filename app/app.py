@@ -12,3 +12,10 @@ def hello():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
+
+@app.get("/health")
+def health():
+    return {
+        "status": "ok",
+        "service": "yam-api"
+    }
