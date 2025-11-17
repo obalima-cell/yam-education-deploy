@@ -4,7 +4,7 @@ This repository contains the backend API for Yam Education, deployed on AWS ECS 
 
 ---
 
-## 🚀 Architecture Overview
+##  Architecture Overview
 
 - **Flask API** packaged into a Docker container  
 - **ECR** hosts the Docker images  
@@ -15,7 +15,7 @@ This repository contains the backend API for Yam Education, deployed on AWS ECS 
 
 ---
 
-## 📡 API Endpoints
+##  API Endpoints
 
 ### **1. Root Endpoint**
 ```
@@ -44,7 +44,7 @@ GET /health
 
 ---
 
-## 🐋 Local Development
+##  Local Development
 
 ### 1️⃣ Build Docker image
 ```
@@ -94,7 +94,7 @@ curl http://YOUR-ALB-DNS/health
 
 ---
 
-## 🔍 Logging & Monitoring
+##  Logging & Monitoring
 
 ### View logs
 ```
@@ -103,6 +103,6 @@ aws logs tail /ecs/yam-education --follow
 
 ---
 
-## 📬 Contact
+##  Contact
 Maintainer: **Oceane Audrey BALIMA**  
 Email: **obalima@introgroup-tech.com**
