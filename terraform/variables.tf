@@ -13,3 +13,8 @@ variable "container_port" {
   default     = 8000
 }
 
+variable "image_tag" {
+  description = "Tag de l'image Docker (ex: v1, v2, latest)"
+  type        = string
+  default     = "v3"
+}

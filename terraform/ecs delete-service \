@@ -1,0 +1,314 @@
+{
+    "services": [
+        {
+            "serviceArn": "arn:aws:ecs:us-east-1:411902770159:service/yam-ecs-cluster/yam-education-svc",
+            "serviceName": "yam-education-svc",
+            "clusterArn": "arn:aws:ecs:us-east-1:411902770159:cluster/yam-ecs-cluster",
+            "loadBalancers": [
+                {
+                    "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:411902770159:targetgroup/yam-tg/075e40f7e5a3523c",
+                    "containerName": "app",
+                    "containerPort": 8000
+                }
+            ],
+            "serviceRegistries": [],
+            "status": "DRAINING",
+            "desiredCount": 0,
+            "runningCount": 0,
+            "pendingCount": 0,
+            "launchType": "FARGATE",
+            "platformVersion": "LATEST",
+            "platformFamily": "Linux",
+            "taskDefinition": "arn:aws:ecs:us-east-1:411902770159:task-definition/yam-task:23",
+            "deploymentConfiguration": {
+                "deploymentCircuitBreaker": {
+                    "enable": false,
+                    "rollback": false
+                },
+                "maximumPercent": 200,
+                "minimumHealthyPercent": 100,
+                "strategy": "ROLLING",
+                "bakeTimeInMinutes": 0
+            },
+            "deployments": [
+                {
+                    "id": "ecs-svc/9636256688195799965",
+                    "status": "PRIMARY",
+                    "taskDefinition": "arn:aws:ecs:us-east-1:411902770159:task-definition/yam-task:23",
+                    "desiredCount": 0,
+                    "pendingCount": 0,
+                    "runningCount": 0,
+                    "failedTasks": 7,
+                    "createdAt": "2025-11-17T07:54:57.544000+00:00",
+                    "updatedAt": "2025-11-17T08:06:54.829000+00:00",
+                    "launchType": "FARGATE",
+                    "platformVersion": "1.4.0",
+                    "platformFamily": "Linux",
+                    "networkConfiguration": {
+                        "awsvpcConfiguration": {
+                            "subnets": [
+                                "subnet-0dded8511b7b2339d",
+                                "subnet-02c63ce5649d48277"
+                            ],
+                            "securityGroups": [
+                                "sg-012c848136a71ffc7"
+                            ],
+                            "assignPublicIp": "ENABLED"
+                        }
+                    },
+                    "rolloutState": "IN_PROGRESS",
+                    "rolloutStateReason": "ECS deployment ecs-svc/9636256688195799965 in progress."
+                }
+            ],
+            "roleArn": "arn:aws:iam::411902770159:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
+            "events": [
+                {
+                    "id": "eb485da0-ae73-4196-b6a9-d38688b45c89",
+                    "createdAt": "2025-11-17T08:06:23.454000+00:00",
+                    "message": "(service yam-education-svc) was unable to place a task. Reason: InternalError: failed to create container model: failed to normalize image reference \"411902770159.dkr.ecr.us-east-1.amazonaws.com/yam-repo:v3:v3\". Launch a new task to retry.."
+                },
+                {
+                    "id": "a26c2fa0-03ec-42eb-8795-66bc4f09d354",
+                    "createdAt": "2025-11-17T08:06:01.518000+00:00",
+                    "message": "(service yam-education-svc) has started 1 tasks: (task 3f912ed7f3044fd89d1f800f49db51fc)."
+                },
+                {
+                    "id": "61854b6e-0442-4427-8aef-45e24cbc2ea8",
+                    "createdAt": "2025-11-17T08:06:00.843000+00:00",
+                    "message": "(service yam-education-svc, taskSet ecs-svc/0019964061942984375) has begun draining connections on 1 tasks."
+                },
+                {
+                    "id": "97025292-04ff-4deb-934c-8fabe9f01f13",
+                    "createdAt": "2025-11-17T08:06:00.838000+00:00",
+                    "message": "(service yam-education-svc) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:us-east-1:411902770159:targetgroup/yam-tg/075e40f7e5a3523c)"
+                },
+                {
+                    "id": "bebf5268-f6b5-4bff-957f-6a08f106cdd5",
+                    "createdAt": "2025-11-17T08:05:20.401000+00:00",
+                    "message": "(service yam-education-svc) was unable to place a task. Reason: InternalError: failed to create container model: failed to normalize image reference \"411902770159.dkr.ecr.us-east-1.amazonaws.com/yam-repo:v3:v3\". Launch a new task to retry.."
+                },
+                {
+                    "id": "65dd9485-e740-45ef-bc52-9dc043f18ead",
+                    "createdAt": "2025-11-17T08:04:52.689000+00:00",
+                    "message": "(service yam-education-svc) has started 1 tasks: (task 4039478cc4df44028bcd530574c98666)."
+                },
+                {
+                    "id": "56a7965c-be23-4ff9-8d04-9805eb67b261",
+                    "createdAt": "2025-11-17T08:04:19.626000+00:00",
+                    "message": "(service yam-education-svc) was unable to place a task. Reason: InternalError: failed to create container model: failed to normalize image reference \"411902770159.dkr.ecr.us-east-1.amazonaws.com/yam-repo:v3:v3\". Launch a new task to retry.."
+                },
+                {
+                    "id": "56448732-166e-420c-ab13-adeebc265542",
+                    "createdAt": "2025-11-17T08:03:52.046000+00:00",
+                    "message": "(service yam-education-svc) has started 1 tasks: (task 140e4c1b58b14ff5a08f0ce5d1456f2d)."
+                },
+                {
+                    "id": "fac14caf-ff75-45aa-9bb6-048d53cafced",
+                    "createdAt": "2025-11-17T08:03:15.598000+00:00",
+                    "message": "(service yam-education-svc) was unable to place a task. Reason: InternalError: failed to create container model: failed to normalize image reference \"411902770159.dkr.ecr.us-east-1.amazonaws.com/yam-repo:v3:v3\". Launch a new task to retry.."
+                },
+                {
+                    "id": "8bc1a793-66b7-4cf1-af80-9136ff5a526a",
+                    "createdAt": "2025-11-17T08:02:56.969000+00:00",
+                    "message": "(service yam-education-svc) has started 1 tasks: (task de5aa757a8274bd6825daee79a9b075e)."
+                },
+                {
+                    "id": "ff4aa9e0-924f-4a5e-b078-6ee7032f752d",
+                    "createdAt": "2025-11-17T07:57:48.669000+00:00",
+                    "message": "(service yam-education-svc) was unable to place a task. Reason: InternalError: failed to create container model: failed to normalize image reference \"411902770159.dkr.ecr.us-east-1.amazonaws.com/yam-repo:v3:v3\". Launch a new task to retry.."
+                },
+                {
+                    "id": "cf12b2fd-8766-4383-9090-d7cd95cb9a56",
+                    "createdAt": "2025-11-17T07:57:28.331000+00:00",
+                    "message": "(service yam-education-svc) has started 1 tasks: (task 67928930eb37415d9dbcfc803126d189)."
+                },
+                {
+                    "id": "df88d567-39d6-4928-8a89-78c71d84e0de",
+                    "createdAt": "2025-11-17T07:56:57.538000+00:00",
+                    "message": "(service yam-education-svc) was unable to place a task. Reason: InternalError: failed to create container model: failed to normalize image reference \"411902770159.dkr.ecr.us-east-1.amazonaws.com/yam-repo:v3:v3\". Launch a new task to retry.."
+                },
+                {
+                    "id": "23f47b56-7e9d-45aa-b1f9-761bde6e8f80",
+                    "createdAt": "2025-11-17T07:56:29.009000+00:00",
+                    "message": "(service yam-education-svc) has started 1 tasks: (task e3eaa84cce5a452c90a8a1f0458d6cd5)."
+                },
+                {
+                    "id": "867b1688-ce3d-4714-a6d5-5e550d0968a3",
+                    "createdAt": "2025-11-17T07:55:58.763000+00:00",
+                    "message": "(service yam-education-svc) was unable to place a task. Reason: InternalError: failed to create container model: failed to normalize image reference \"411902770159.dkr.ecr.us-east-1.amazonaws.com/yam-repo:v3:v3\". Launch a new task to retry.."
+                },
+                {
+                    "id": "3f9328d5-39c1-4e40-9ceb-900170857cd1",
+                    "createdAt": "2025-11-17T07:55:29.276000+00:00",
+                    "message": "(service yam-education-svc) has started 1 tasks: (task 840e512ea46e4cc09813ac345c9dfc33)."
+                },
+                {
+                    "id": "daad9254-f03b-4de1-a6ee-649641bcdfe2",
+                    "createdAt": "2025-11-17T07:55:27.226000+00:00",
+                    "message": "(service yam-education-svc) stopped 1 pending tasks."
+                },
+                {
+                    "id": "ee7e4937-3d9f-4179-af22-555d00b563c7",
+                    "createdAt": "2025-11-17T07:55:08.505000+00:00",
+                    "message": "(service yam-education-svc) has started 1 tasks: (task ccac9784aad847a28d5bf24b724cfcd6)."
+                },
+                {
+                    "id": "d04c6270-1bd8-43be-b281-0535f70e34a4",
+                    "createdAt": "2025-11-17T07:54:06.080000+00:00",
+                    "message": "(service yam-education-svc) was unable to place a task. Reason: InternalError: failed to create container model: failed to normalize image reference \"411902770159.dkr.ecr.us-east-1.amazonaws.com/yam-repo:v3:v3\". Launch a new task to retry.."
+                },
+                {
+                    "id": "c200aff5-d9e2-408f-895f-a5f8af0989d3",
+                    "createdAt": "2025-11-17T07:53:46.092000+00:00",
+                    "message": "(service yam-education-svc) has started 1 tasks: (task 9d5040bc1e3f45f0a9e7925e6f1fae07)."
+                },
+                {
+                    "id": "7fcd3006-bb96-4e5a-958f-49e35e639786",
+                    "createdAt": "2025-11-17T07:48:44.806000+00:00",
+                    "message": "(service yam-education-svc) was unable to place a task. Reason: InternalError: failed to create container model: failed to normalize image reference \"411902770159.dkr.ecr.us-east-1.amazonaws.com/yam-repo:v3:v3\". Launch a new task to retry.."
+                },
+                {
+                    "id": "1b43ade7-dd8d-433d-81b4-5ec54364458a",
+                    "createdAt": "2025-11-17T07:48:15.708000+00:00",
+                    "message": "(service yam-education-svc) has started 1 tasks: (task 7412620701684598a3c06c4f5e2a562e)."
+                },
+                {
+                    "id": "97a6eb9d-18ba-4dfe-865a-afa8400da8aa",
+                    "createdAt": "2025-11-17T07:47:36.117000+00:00",
+                    "message": "(service yam-education-svc) was unable to place a task. Reason: InternalError: failed to create container model: failed to normalize image reference \"411902770159.dkr.ecr.us-east-1.amazonaws.com/yam-repo:v3:v3\". Launch a new task to retry.."
+                },
+                {
+                    "id": "bd3ad800-4cde-4841-8809-62691661d88c",
+                    "createdAt": "2025-11-17T07:47:17.147000+00:00",
+                    "message": "(service yam-education-svc) has started 1 tasks: (task 412f460746d14c99bcfab5b7a38d74b0)."
+                },
+                {
+                    "id": "4716c06b-8549-4321-9467-a2b520e641f4",
+                    "createdAt": "2025-11-17T07:46:34.852000+00:00",
+                    "message": "(service yam-education-svc) was unable to place a task. Reason: InternalError: failed to create container model: failed to normalize image reference \"411902770159.dkr.ecr.us-east-1.amazonaws.com/yam-repo:v3:v3\". Launch a new task to retry.."
+                },
+                {
+                    "id": "1b6cd436-12e9-4100-914e-ed9eb2a47ee3",
+                    "createdAt": "2025-11-17T07:46:15.264000+00:00",
+                    "message": "(service yam-education-svc) has started 1 tasks: (task d4a0b3d61c204d5e90a5f1000f0ec591)."
+                },
+                {
+                    "id": "4624178f-675c-4d12-a05f-c735c77d169f",
+                    "createdAt": "2025-11-17T02:52:54.033000+00:00",
+                    "message": "(service yam-education-svc) has reached a steady state."
+                },
+                {
+                    "id": "1542d0bc-0722-4741-b935-46090d039077",
+                    "createdAt": "2025-11-17T02:52:54.032000+00:00",
+                    "message": "(service yam-education-svc) (deployment ecs-svc/0019964061942984375) deployment completed."
+                },
+                {
+                    "id": "03208f86-0256-4b9b-bc42-a1631680ef52",
+                    "createdAt": "2025-11-17T02:51:52.243000+00:00",
+                    "message": "(service yam-education-svc, taskSet ecs-svc/7987316473438708659) has begun draining connections on 1 tasks."
+                },
+                {
+                    "id": "3893c128-a347-4dcb-9b42-eb066c71303d",
+                    "createdAt": "2025-11-17T02:51:52.238000+00:00",
+                    "message": "(service yam-education-svc) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:us-east-1:411902770159:targetgroup/yam-tg/075e40f7e5a3523c)"
+                },
+                {
+                    "id": "d9684112-c021-4ddc-a30f-3449b3e58c75",
+                    "createdAt": "2025-11-17T02:51:42.844000+00:00",
+                    "message": "(service yam-education-svc) has stopped 1 running tasks: (task 65720d4d07a6418dab27c3b08620d22d)."
+                },
+                {
+                    "id": "253defdb-c2cc-4406-8c9d-e5af6516cbc5",
+                    "createdAt": "2025-11-17T02:50:51.153000+00:00",
+                    "message": "(service yam-education-svc) registered 1 targets in (target-group arn:aws:elasticloadbalancing:us-east-1:411902770159:targetgroup/yam-tg/075e40f7e5a3523c)"
+                },
+                {
+                    "id": "456cf46f-9da1-4570-871b-169fb5624402",
+                    "createdAt": "2025-11-17T02:50:21.210000+00:00",
+                    "message": "(service yam-education-svc) has started 1 tasks: (task 7335fee296804ac2ba899561e1c9c632)."
+                },
+                {
+                    "id": "c0d43579-5039-47bd-8cce-774bab18bded",
+                    "createdAt": "2025-11-17T02:49:28.138000+00:00",
+                    "message": "(service yam-education-svc) has reached a steady state."
+                },
+                {
+                    "id": "8a4e2e94-6b67-4b0c-bc85-16dfa065a6a5",
+                    "createdAt": "2025-11-17T02:49:28.137000+00:00",
+                    "message": "(service yam-education-svc) (deployment ecs-svc/7987316473438708659) deployment completed."
+                },
+                {
+                    "id": "5e6b4998-43d9-4c91-a2ae-6d6b4c7c6c15",
+                    "createdAt": "2025-11-17T02:48:28.382000+00:00",
+                    "message": "(service yam-education-svc, taskSet ecs-svc/8267898466698498594) has begun draining connections on 1 tasks."
+                },
+                {
+                    "id": "b5747991-00a7-41d2-b957-955b794fa52f",
+                    "createdAt": "2025-11-17T02:48:28.353000+00:00",
+                    "message": "(service yam-education-svc) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:us-east-1:411902770159:targetgroup/yam-tg/075e40f7e5a3523c)"
+                },
+                {
+                    "id": "2b44f886-3d6e-41fe-a402-82d09bbe6b5b",
+                    "createdAt": "2025-11-17T02:48:18.088000+00:00",
+                    "message": "(service yam-education-svc) has stopped 1 running tasks: (task 18ad525af7c9446b84812633ea135071)."
+                },
+                {
+                    "id": "70c68ca5-40db-40ba-a7a3-17cc5396d07f",
+                    "createdAt": "2025-11-17T02:47:25.569000+00:00",
+                    "message": "(service yam-education-svc) registered 1 targets in (target-group arn:aws:elasticloadbalancing:us-east-1:411902770159:targetgroup/yam-tg/075e40f7e5a3523c)"
+                },
+                {
+                    "id": "4ca93377-d0e0-4c2e-a1e9-0a409ac4d465",
+                    "createdAt": "2025-11-17T02:46:55.714000+00:00",
+                    "message": "(service yam-education-svc) has started 1 tasks: (task 65720d4d07a6418dab27c3b08620d22d)."
+                },
+                {
+                    "id": "65f94533-0d24-47f4-b56b-d41406666d08",
+                    "createdAt": "2025-11-16T23:31:53.543000+00:00",
+                    "message": "(service yam-education-svc) has reached a steady state."
+                },
+                {
+                    "id": "eff34125-7ad9-4851-9b09-2044afbeb6fa",
+                    "createdAt": "2025-11-16T23:31:53.542000+00:00",
+                    "message": "(service yam-education-svc) (deployment ecs-svc/8267898466698498594) deployment completed."
+                },
+                {
+                    "id": "d3890fab-e81a-475f-9513-fdff7969d6fa",
+                    "createdAt": "2025-11-16T23:31:43.075000+00:00",
+                    "message": "(service yam-education-svc) registered 1 targets in (target-group arn:aws:elasticloadbalancing:us-east-1:411902770159:targetgroup/yam-tg/075e40f7e5a3523c)"
+                },
+                {
+                    "id": "959ab74e-5f64-445c-86c5-458284e7364c",
+                    "createdAt": "2025-11-16T23:31:13.086000+00:00",
+                    "message": "(service yam-education-svc) has started 1 tasks: (task 18ad525af7c9446b84812633ea135071)."
+                }
+            ],
+            "createdAt": "2025-11-16T23:30:59.988000+00:00",
+            "placementConstraints": [],
+            "placementStrategy": [],
+            "networkConfiguration": {
+                "awsvpcConfiguration": {
+                    "subnets": [
+                        "subnet-0dded8511b7b2339d",
+                        "subnet-02c63ce5649d48277"
+                    ],
+                    "securityGroups": [
+                        "sg-012c848136a71ffc7"
+                    ],
+                    "assignPublicIp": "ENABLED"
+                }
+            },
+            "healthCheckGracePeriodSeconds": 0,
+            "schedulingStrategy": "REPLICA",
+            "deploymentController": {
+                "type": "ECS"
+            },
+            "createdBy": "arn:aws:iam::411902770159:user/Oceane",
+            "enableECSManagedTags": false,
+            "propagateTags": "NONE",
+            "enableExecuteCommand": false,
+            "availabilityZoneRebalancing": "ENABLED"
+        }
+    ],
+    "failures": []
+}
